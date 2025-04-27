@@ -1,12 +1,31 @@
 import React from "react";
+import { Link } from "react-router";
 
 const GalleryItemCard = ({ item }) => {
   return (
     <div
-      className="flex relative"
+      className="flex relative group"
       style={{ gridRowEnd: `span ${Math.ceil(item.height / 100)}` }}
     >
-      <img src={item.media} className="w-full rounded-lg object-cover" alt="" />
+      <img
+        src={item.media}
+        className="w-full rounded-2xl  object-cover"
+        alt=""
+      />
+      <div className="hidden group-hover:block group-hover:absolute   h-full w-full top-0 left-0 group-hover:bg-black/30 rounded-2xl ">
+        <Link to={`/pin/${item.id}`} className="" />
+        <button className="bg-[#e50829]  text-sm text-white absolute top-2 right-2 rounded-3xl py-3 px-4 font-medium cursor-pointer w-max">
+          Save
+        </button>
+        <div className="absolute bottom-2 right-2 flex gap-2 items-center">
+          <button className="size-8 rounded-full bg-white flex items-center justify-center cursor-pointer">
+            <img src="/general/share.svg" alt="" />
+          </button>
+          <button className="size-8 rounded-full bg-white flex items-center justify-center cursor-pointer">
+            <img src="/general/more.svg" alt="" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
