@@ -1,13 +1,11 @@
 import { Route, Routes } from "react-router";
 import "./App.css";
-import Gallery from "./components/Gallery";
-import Leftbar from "./components/Leftbar";
-import Topbar from "./components/Topbar";
 import MainLayout from "./layout/MainLayout";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import UserProfilepage from "./pages/UserProfilepage";
 import PostPage from "./pages/PostPage";
+import AuthPage from "./pages/AuthPage";
 
 function App() {
   return (
@@ -19,6 +17,7 @@ function App() {
         <Route path="/:username" element={<UserProfilepage />} />
         <Route path="/search" element={<SearchPage />} />
       </Route>
+      <Route path="/auth" element={<AuthPage />} />
     </Routes>
   );
 }
