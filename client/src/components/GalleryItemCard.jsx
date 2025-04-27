@@ -1,17 +1,16 @@
 import React from "react";
 import { Link } from "react-router";
+import Image from "./Image";
 
 const GalleryItemCard = ({ item }) => {
+  const optimizedHeight = (372 * item.height) / item.width;
   return (
     <div
       className="flex relative group"
       style={{ gridRowEnd: `span ${Math.ceil(item.height / 100)}` }}
     >
-      <img
-        src={item.media}
-        className="w-full rounded-2xl  object-cover"
-        alt=""
-      />
+      <Image path={item.media} h={optimizedHeight} w={372} />
+
       <div className="hidden group-hover:block group-hover:absolute   h-full w-full top-0 left-0 group-hover:bg-black/30 rounded-2xl ">
         <Link to={`/pin/${item.id}`} className="" />
         <button className="bg-[#e50829]  text-sm text-white absolute top-2 right-2 rounded-3xl py-3 px-4 font-medium cursor-pointer w-max">
