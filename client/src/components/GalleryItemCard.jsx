@@ -9,7 +9,12 @@ const GalleryItemCard = ({ item }) => {
       className="flex relative group"
       style={{ gridRowEnd: `span ${Math.ceil(item.height / 100)}` }}
     >
-      <Image path={item.media} h={optimizedHeight} w={372} />
+      <Image
+        path={item.media}
+        h={optimizedHeight}
+        w={372}
+        className=" rounded-2xl  object-cover"
+      />
 
       <div className="hidden group-hover:block group-hover:absolute   h-full w-full top-0 left-0 group-hover:bg-black/30 rounded-2xl ">
         <Link to={`/pin/${item.id}`} className="" />
@@ -18,10 +23,10 @@ const GalleryItemCard = ({ item }) => {
         </button>
         <div className="absolute bottom-2 right-2 flex gap-2 items-center">
           <button className="size-8 rounded-full bg-white flex items-center justify-center cursor-pointer">
-            <img src="/general/share.svg" alt="" />
+            <Image path="/general/share.svg" alt="" />
           </button>
           <button className="size-8 rounded-full bg-white flex items-center justify-center cursor-pointer">
-            <img src="/general/more.svg" alt="" />
+            <Image path="/general/more.svg" alt="" />
           </button>
         </div>
       </div>
