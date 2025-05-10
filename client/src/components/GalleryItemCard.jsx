@@ -10,14 +10,14 @@ const GalleryItemCard = ({ item }) => {
       style={{ gridRowEnd: `span ${Math.ceil(item.height / 100)}` }}
     >
       <Image
-        path={item.media}
+        src={item.media}
         h={optimizedHeight}
         w={372}
         className=" rounded-2xl  object-cover"
       />
 
       <div className="hidden group-hover:block group-hover:absolute   h-full w-full top-0 left-0 group-hover:bg-black/30 rounded-2xl ">
-        <Link to={`/pin/${item.id}`} className="" />
+        <Link to={`/pin/${item._id}`} className="" />
         <button className="bg-[#e50829]  text-sm text-white absolute top-2 right-2 rounded-3xl py-3 px-4 font-medium cursor-pointer w-max">
           Save
         </button>
