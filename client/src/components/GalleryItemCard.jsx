@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import Image from "./Image";
 
 const GalleryItemCard = ({ item }) => {
   const optimizedHeight = (372 * item.height) / item.width;
+  const navigate = useNavigate();
   return (
     <div
       className="flex relative group"
@@ -16,8 +16,10 @@ const GalleryItemCard = ({ item }) => {
         className=" rounded-2xl  object-cover"
       />
 
-      <div className="hidden group-hover:block group-hover:absolute   h-full w-full top-0 left-0 group-hover:bg-black/30 rounded-2xl ">
-        <Link to={`/pin/${item._id}`} className="" />
+      <div
+        onClick={() => navigate(`/pin/${item._id}`)}
+        className="hidden group-hover:block group-hover:absolute  cursor-pointer  h-full w-full top-0 left-0 group-hover:bg-black/30 rounded-2xl "
+      >
         <button className="bg-[#e50829]  text-sm text-white absolute top-2 right-2 rounded-3xl py-3 px-4 font-medium cursor-pointer w-max">
           Save
         </button>

@@ -2,19 +2,31 @@ import React, { useState } from "react";
 import Image from "../components/Image";
 import Gallery from "../components/Gallery";
 import Collection from "../components/Collection";
+import { useParams } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import apiRequest from "../utils/apiRequest";
 
 const UserProfilepage = () => {
   const [isActive, setIsActive] = useState(0);
+  const { username } = useParams();
+  const { isPending, error, data } = useQuery({
+    queryKey: ["profile", username],
+    queryFn: () => apiRequest.get(`users/${username}`).then((res) => res.data),
+  });
+
+  if (isPending) return <h1>Loading...</h1>;
+  if (error) return <h1>{error.message}</h1>;
+  if (!data) return <h1>User not found</h1>;
   return (
     <div className="flex flex-col items-center gap-4">
       <Image
-        path="general/noAvatar.png"
+        src={data.img || "general/noAvatar.png"}
         w={100}
         h={100}
         className="rounded-full object-cover"
       />
-      <h1 className="text-4xl font-medium">Jhon Deo</h1>
-      <span className="text-[#f1f1f1] font-light">@johndeo</span>
+      <h1 className="text-4xl font-medium">{data.displayName}</h1>
+      <span className="text-gray-400 font-medium">@{data.username}</span>
       <div className="font-medium ">10 followers - 10 following</div>
       <div className="flex items-center gap-8">
         <Image path="general/share.svg" />
@@ -46,7 +58,7 @@ const UserProfilepage = () => {
           Saved
         </span>
       </div>
-      {isActive === 0 ? <Gallery /> : <Collection />}
+      {isActive === 0 ? <Gallery userId={data._id} /> : <Collection />}
     </div>
   );
 };
