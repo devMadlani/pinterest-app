@@ -3,7 +3,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 export const registerUser = async (req, res) => {
   const { username, displayName, email, password } = req.body;
-  console.log(username, displayName, email, password);
   if (!username || !displayName || !email || !password)
     return res.status(400).json({ message: "All fields are required" });
   const newHashedPassword = await bcrypt.hash(password, 10);
