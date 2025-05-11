@@ -3,10 +3,11 @@ import GalleryItemCard from "./GalleryItemCard";
 import axios from "axios";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
+import apiRequest from "../utils/apiRequest";
 
 const Gallery = ({ search, userId, boardId }) => {
   const fetchPins = async ({ pageParam, search, userId, boardId }) => {
-    const res = await axios(
+    const res = await apiRequest.get(
       `${import.meta.env.VITE_API_ENDPOINT}/pins?cursor=${pageParam}&search=${
         search || ""
       }&userId=${userId || ""}&boardId=${boardId || ""}`

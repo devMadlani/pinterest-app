@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import Image from "./Image";
-import EmojiPicker from "emoji-picker-react";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import apiRequest from "../utils/apiRequest";
 import Comment from "./Comment";
+import CommentForm from "./CommentForm";
 
 const Comments = ({ id }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const {
     isPending,
     error,
@@ -31,21 +29,7 @@ const Comments = ({ id }) => {
           <Comment key={comment._id} comment={comment} />
         ))}
       </div>
-      <form className="flex items-center gap-4 p-4 rounded-4xl bg-[#f1f1f1]">
-        <input
-          type="text"
-          placeholder="Add a comment"
-          className="flex-1  outline-none bg-transparent text-base"
-        />
-        <div className=" cursor-pointer text-xl relative">
-          <div onClick={() => setIsOpen(!isOpen)}>😊</div>
-          {isOpen && (
-            <div className="absolute right-0 bottom-[50px]">
-              <EmojiPicker />
-            </div>
-          )}
-        </div>
-      </form>
+      <CommentForm />
     </div>
   );
 };

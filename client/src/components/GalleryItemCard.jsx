@@ -13,7 +13,7 @@ const GalleryItemCard = ({ item }) => {
         src={item.media}
         h={optimizedHeight}
         w={372}
-        className=" rounded-2xl  object-cover"
+        className=" rounded-2xl  object-cover w-full "
       />
 
       <div
