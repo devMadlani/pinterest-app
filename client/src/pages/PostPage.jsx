@@ -40,7 +40,7 @@ const PostPage = () => {
             />
             <span className="text-sm">{data.user.displayName}</span>
           </Link>
-          <Comments />
+          <Comments id={data._id} />
         </div>
       </div>
     </div>

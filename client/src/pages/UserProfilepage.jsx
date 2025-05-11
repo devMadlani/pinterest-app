@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "../components/Image";
 import Gallery from "../components/Gallery";
-import Collection from "../components/Collection";
+import Boards from "../components/Boards";
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import apiRequest from "../utils/apiRequest";
@@ -58,7 +58,11 @@ const UserProfilepage = () => {
           Saved
         </span>
       </div>
-      {isActive === 0 ? <Gallery userId={data._id} /> : <Collection />}
+      {isActive === 0 ? (
+        <Gallery userId={data._id} />
+      ) : (
+        <Boards userId={data._id} />
+      )}
     </div>
   );
 };
