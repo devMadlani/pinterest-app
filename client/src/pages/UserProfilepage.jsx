@@ -5,6 +5,7 @@ import Boards from "../components/Boards";
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import apiRequest from "../utils/apiRequest";
+import FollowButton from "../components/FollowButton";
 
 const UserProfilepage = () => {
   const [isActive, setIsActive] = useState(0);
@@ -27,16 +28,19 @@ const UserProfilepage = () => {
       />
       <h1 className="text-4xl font-medium">{data.displayName}</h1>
       <span className="text-gray-400 font-medium">@{data.username}</span>
-      <div className="font-medium ">10 followers - 10 following</div>
+      <div className="font-medium ">
+        {data.followerCount} followers - {data.followingCount} following
+      </div>
       <div className="flex items-center gap-8">
         <Image path="general/share.svg" />
         <div className="flex gap-4">
           <button className="p-4 rounded-4xl font-bold cursor-pointer bg-gray-200/70">
             Message
           </button>
-          <button className="p-4 rounded-4xl font-bold cursor-pointer bg-[#e50829] text-white hover:bg-[#c1011e]">
-            follow
-          </button>
+          <FollowButton
+            isFollowing={data.isFollowing}
+            username={data.username}
+          />
         </div>
         <Image path="general/more.svg" />
       </div>

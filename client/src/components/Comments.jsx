@@ -10,7 +10,7 @@ const Comments = ({ id }) => {
     error,
     data: comments,
   } = useQuery({
-    queryKey: ["boards", id],
+    queryKey: ["comments", id],
     queryFn: () => apiRequest.get(`comments/${id}`).then((res) => res.data),
   });
 
