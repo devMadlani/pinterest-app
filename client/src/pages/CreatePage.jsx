@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Image from "../components/Image";
+import IKImage from "../components/Image";
 import useAuthStore from "../store/authStore";
 import { useNavigate } from "react-router";
 import Editor from "./Editor";
@@ -7,6 +7,11 @@ import Editor from "./Editor";
 const CreatePage = () => {
   const { currentUser } = useAuthStore();
   const [file, setFile] = useState(null);
+  const [previewImg, setPreviewImg] = useState({
+    url: "",
+    width: 0,
+    height: 0,
+  });
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -14,7 +19,18 @@ const CreatePage = () => {
       navigate("/auth");
     }
   }, [navigate, currentUser]);
-  const previewImgURL = file ? URL.createObjectURL(file) : null;
+  useEffect(() => {
+    if (!file) return;
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    img.onload = () => {
+      setPreviewImg({
+        url: URL.createObjectURL(file),
+        width: img.width,
+        height: img.height,
+      });
+    };
+  }, [file]);
 
   return (
     <div>
@@ -27,17 +43,21 @@ const CreatePage = () => {
         </button>
       </div>
       {isEditing ? (
-        <Editor />
+        <Editor previewImg={previewImg} />
       ) : (
         <div className="mt-8 flex flex-col  lg:flex-row lg:mb-16   justify-center gap-16">
-          {previewImgURL ? (
+          {previewImg.url ? (
             <div className="w-[375px] relative ">
-              <img src={previewImgURL} alt="" className="rounded-4xl w-full " />
+              <img
+                src={previewImg.url}
+                alt=""
+                className="rounded-4xl w-full "
+              />
               <div
                 className="absolute top-4 right-4 bg-white w-10 h-10 flex items-center justify-center p-1.5 rounded-full cursor-pointer"
                 onClick={() => setIsEditing(true)}
               >
-                <Image path="/general/edit.svg" />
+                <IKImage path="/general/edit.svg" />
               </div>
             </div>
           ) : (
@@ -47,7 +67,7 @@ const CreatePage = () => {
                 className="bg-[#e9e9e9] cursor-pointer text-lg flex justify-center items-center rounded-4xl border-dashed broder-[#dddddd] w-full  max-w-[375px] h-[574px] p-4 relative"
               >
                 <div className="flex flex-col items-center gap-4">
-                  <Image path="general/upload.svg" />
+                  <IKImage path="general/upload.svg" />
                   <span>Chooose file</span>
                 </div>
                 <div className="absolute bottom-8 text-[13px] text-center color-[#808080]">
